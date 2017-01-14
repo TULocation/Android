@@ -1,66 +1,54 @@
 package com.app.skynet.tulocation;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+
 
 public class TULocationMain extends ActionBarActivity {
-    WifiManager mainWifiObj;
-    BroadcastReceiver receiver;
     ListView list;
     ArrayAdapter adapter;
-    ArrayList<String> wifiList;
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
         System.out.println("TRIGED BY USER");
-        mainWifiObj.startScan();
     }
     public void goToActivityList (View view){
         Intent intent = new Intent (this, com.app.skynet.tulocation.list.TULocationList.class);
         startActivity(intent);
     }
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tulocation_main);
-        wifiList =  new ArrayList<String>();
-        list = (ListView) findViewById(R.id.listView);
-        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, wifiList);
-        list.setAdapter(adapter);
-        mainWifiObj = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        mainWifiObj.startScan();
-        if (receiver == null)
-            receiver = new TestReceiver();
-
-        registerReceiver(receiver, new IntentFilter(
-                WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainactivity_actions, menu);
+        return super.onCreateOptionsMenu(menu);
     }
-    class TestReceiver extends BroadcastReceiver {
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            System.out.println(action);
-            List<ScanResult> wifiTmp = mainWifiObj.getScanResults();
-            wifiList.clear();
-            for (ScanResult scanResult : wifiTmp) {
-                wifiList.add(scanResult.BSSID + " : " + scanResult.level);
-                System.out.println("TEST: is "+scanResult.toString());
-            }
-            adapter.notifyDataSetChanged();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_ap_list:
+                Intent intent = new Intent (this, com.app.skynet.tulocation.list.TULocationList.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_map_view:
+                //HANDLE CLICK
+                return true;
+            case R.id.action_app_settings:
+                //HANDLE CLICK
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

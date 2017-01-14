@@ -7,6 +7,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,8 +24,18 @@ public class TULocationList extends ActionBarActivity implements List {
     public AccessPoint getElement(int index) {
         return apList.get(index);
     }
+    public void dojebNowegoAccessPointa(String BSSID, String mac, double posX, double posY, double signalStrength) {
+        apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
+        wifiList.add(apList.get(apList.size() - 1).toString());
+        adapter.notifyDataSetChanged();
+    }
     public void wyjebAccessPointa(int index) {
         apList.remove(index);
+        adapter.notifyDataSetChanged();
+    }
+    public void wyjebWszystkieAccessPointy() {
+        apList.clear();
+        adapter.notifyDataSetChanged();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +43,25 @@ public class TULocationList extends ActionBarActivity implements List {
         setContentView(R.layout.activity_tulocation_list);
         wifiList =  new ArrayList<String>();
         list = (ListView) findViewById(R.id.listView);
+        initList();
         adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, wifiList);
         list.setAdapter(adapter);
     }
-    public void jeb(View view) {
-        apList.add(new AccessPoint("huehuenazwa", "huehueMAK", 10, 15, 20.0));
-        for(AccessPoint i:apList) {
-            wifiList.add(i.toString());
-            System.out.println("TEST: is "+wifiList.toString());
-        }
+    private void initList() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3)
+            {
+                System.out.println(position);
+            }
+        });
+    }
+    public void jebnijSkana(View view) {
+        dojebNowegoAccessPointa("huehuenazwa", "huehueMAK", 10, 15, 20.0);
         adapter.notifyDataSetChanged();
+    }
+    public void zajebAPzBazy(View view) {
+        //HANDLE CLICK
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"  android:layout_height="4dp" android:layout_width="4dp">
+    <!-- Search / will display always -->
+    <item android:id="@+id/action_ap_list"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/action_aplist"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_map_view"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/action_map_view"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_app_settings"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/action_app_settings"
+        android:showAsAction="ifRoom"/>
+    </menu>

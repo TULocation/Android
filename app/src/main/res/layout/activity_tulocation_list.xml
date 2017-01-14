@@ -16,7 +16,7 @@
         android:id="@+id/scan_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:onClick="jeb"
+        android:onClick="jebnijSkana"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -26,23 +26,21 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:onClick="zajebAPzBazy"
         android:id="@+id/loadFromDB_button" />
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnCount="1"
-        android:rowCount="2">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="144dp"
-            android:text="New Text"
-            android:id="@+id/textView"
-            android:layout_rowSpan="2" />
+        android:rowCount="2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ListView
             android:layout_width="wrap_content"
-            android:layout_height="272dp"
+            android:layout_height="426dp"
             android:id="@+id/listView"/>
         <!--android:theme="@style/ListFont"-->
 
