@@ -1,8 +1,8 @@
 package com.app.skynet.tulocation.list;
-
-/**
- * Created by Nerond on 14-Jan-17.
- */
+import java.util.ArrayList;
 
 public interface List {
+    public ArrayList<AccessPoint> apList = new ArrayList<AccessPoint>();
+    public AccessPoint getElement(int index);
+    public void wyjebAccessPointa(int index);
 }

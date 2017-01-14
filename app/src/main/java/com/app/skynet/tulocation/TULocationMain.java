@@ -8,10 +8,9 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,10 @@ public class TULocationMain extends ActionBarActivity {
         super.onUserInteraction();
         System.out.println("TRIGED BY USER");
         mainWifiObj.startScan();
+    }
+    public void goToActivityList (View view){
+        Intent intent = new Intent (this, com.app.skynet.tulocation.list.TULocationList.class);
+        startActivity(intent);
     }
 
     @Override
