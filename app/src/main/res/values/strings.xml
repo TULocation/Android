@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">TULocation</string>
+    <string name="action_aplist">List AP</string>
+    <string name="action_map_view">Map</string>
+    <string name="action_app_settings">Settings</string>
 </resources>
