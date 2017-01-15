@@ -1,7 +1,9 @@
 package com.app.skynet.tulocation.list;
 
 
-public class AccessPoint {
+import java.io.Serializable;
+
+public class AccessPoint implements Serializable {
     private String BSSID;
     private String mac;
     private double posX;
@@ -16,6 +18,14 @@ public class AccessPoint {
     }
     public AccessPoint(){
         this(null,null,0,0,0);
+    }
+
+    public void replaceSettings(AccessPoint ap) {
+        this.setBSSID(ap.BSSID);
+        this.setMac(ap.mac);
+        this.setPosX(ap.posX);
+        this.setPosY(ap.posY);
+        this.setSignalStrength(ap.signalStrength);
     }
 
     public String getMac() {

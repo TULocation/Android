@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.app.skynet.tulocation.list.TULocationListDetail">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:layout_marginTop="35dp"
+        android:id="@+id/setY"
+        android:layout_below="@+id/setX"
+        android:layout_alignLeft="@+id/setX"
+        android:layout_alignStart="@+id/setX" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:ems="10"
+        android:layout_marginRight="31dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginTop="74dp"
+        android:id="@+id/setX"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="X Position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/setX"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/XPosLabel" />
+
+    <TextView
+        android:text="Y Position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/YPosLabel"
+        android:layout_alignTop="@+id/setY"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Mac address:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/macLabel"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:text="NULL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/apMac"
+        android:layout_below="@+id/macLabel"
+        android:layout_toRightOf="@+id/macLabel"
+        android:layout_toEndOf="@+id/macLabel"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:text="BSSID:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bssidLabel"
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/apMac"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="NULL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/apBSSID"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/bssidLabel"
+        android:layout_alignLeft="@+id/apMac"
+        android:layout_alignStart="@+id/apMac" />
+
+    <Button
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveButton"
+        android:onClick="save"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

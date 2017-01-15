@@ -1,9 +1,7 @@
 package com.app.skynet.tulocation.list;
 
 
-import android.content.Context;
-import android.content.IntentFilter;
-import android.net.wifi.WifiManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -12,14 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.app.skynet.tulocation.R;
-import com.app.skynet.tulocation.TULocationMain;
 
 import java.util.ArrayList;
 
 public class TULocationList extends ActionBarActivity implements List {
-    ListView list;
-    ArrayAdapter adapter;
-    ArrayList<String> wifiList;
+    private ListView list;
+    private int chosen = 0;
+    private ArrayAdapter adapter;
+    private ArrayList<String> wifiList;
     @Override
     public AccessPoint getElement(int index) {
         return apList.get(index);
@@ -48,12 +46,16 @@ public class TULocationList extends ActionBarActivity implements List {
         list.setAdapter(adapter);
     }
     private void initList() {
+        final Intent detailIntent = new Intent (this, com.app.skynet.tulocation.list.TULocationListDetail.class);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3)
             {
-                System.out.println(position);
+                setChosen(position);
+                setContentView(R.layout.activity_tulocation_list_details);
+                detailIntent.putExtra("chosenAP", apList.get(position));
+                startActivity(detailIntent);
             }
         });
     }
@@ -63,5 +65,13 @@ public class TULocationList extends ActionBarActivity implements List {
     }
     public void zajebAPzBazy(View view) {
         //HANDLE CLICK
+    }
+
+    public int getChosen() {
+        return chosen;
+    }
+
+    public void setChosen(int chosen) {
+        this.chosen = chosen;
     }
 }
