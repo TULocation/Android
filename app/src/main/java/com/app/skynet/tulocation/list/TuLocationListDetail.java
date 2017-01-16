@@ -6,10 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.app.skynet.tulocation.R;
 
-import java.util.ArrayList;
 
 public class TULocationListDetail extends ActionBarActivity {
     private AccessPoint ap;
@@ -34,8 +32,8 @@ public class TULocationListDetail extends ActionBarActivity {
         etYPos.setText(String.valueOf(ap.getPosY()), TextView.BufferType.EDITABLE);
     }
     public void save(View view) {
-        ap.setPosX(Double.parseDouble(etXPos.getText().toString()));
+        /*ap.setPosX(Double.parseDouble(etXPos.getText().toString()));
         ap.setPosY(Double.parseDouble(etYPos.getText().toString()));
-        ap.setMac("LOL");
+        ap.setMac("LOL");*/
     }
 }
