@@ -42,10 +42,11 @@ public class TULocationList extends ActionBarActivity {
             }
         });
     }
-    public void jebnijSkana(View view) {
+    public void scanButton(View view) {
         globalAPList.addAP("huehuenazwa", "huehueMAK", 10, 15, 20.0);
+        refreshList();
     }
-    public void zajebAPzBazy(View view) {
+    public void loadDBButton(View view) {
         //HANDLE CLICK
     }
     private void refreshList(){

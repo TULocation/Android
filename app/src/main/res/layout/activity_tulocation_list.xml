@@ -15,7 +15,7 @@
         android:id="@+id/scan_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:onClick="jebnijSkana"
+        android:onClick="scanButton"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -25,7 +25,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="zajebAPzBazy"
+        android:onClick="loadDBButton"
         android:id="@+id/loadFromDB_button" />
 
     <GridLayout
