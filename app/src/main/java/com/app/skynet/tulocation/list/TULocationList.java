@@ -13,36 +13,19 @@ import com.app.skynet.tulocation.R;
 
 import java.util.ArrayList;
 
-public class TULocationList extends ActionBarActivity implements List {
+public class TULocationList extends ActionBarActivity {
     private ListView list;
     private int chosen = 0;
     private ArrayAdapter adapter;
-    private ArrayList<String> wifiList;
-    @Override
-    public AccessPoint getElement(int index) {
-        return apList.get(index);
-    }
-    public void dojebNowegoAccessPointa(String BSSID, String mac, double posX, double posY, double signalStrength) {
-        apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
-        wifiList.add(apList.get(apList.size() - 1).toString());
-        adapter.notifyDataSetChanged();
-    }
-    public void wyjebAccessPointa(int index) {
-        apList.remove(index);
-        adapter.notifyDataSetChanged();
-    }
-    public void wyjebWszystkieAccessPointy() {
-        apList.clear();
-        adapter.notifyDataSetChanged();
-    }
+    public static APList globalAPList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tulocation_list);
-        wifiList =  new ArrayList<String>();
         list = (ListView) findViewById(R.id.listView);
+        globalAPList = new APList();
         initList();
-        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, wifiList);
+        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, globalAPList.getWifiList());
         list.setAdapter(adapter);
     }
     private void initList() {
@@ -54,23 +37,23 @@ public class TULocationList extends ActionBarActivity implements List {
             {
                 setChosen(position);
                 setContentView(R.layout.activity_tulocation_list_details);
-                detailIntent.putExtra("chosenAP", apList.get(position));
+                detailIntent.putExtra("chosenAP", globalAPList.apList.get(position));
                 startActivity(detailIntent);
             }
         });
     }
     public void jebnijSkana(View view) {
-        dojebNowegoAccessPointa("huehuenazwa", "huehueMAK", 10, 15, 20.0);
-        adapter.notifyDataSetChanged();
+        globalAPList.dojebNowegoAccessPointa("huehuenazwa", "huehueMAK", 10, 15, 20.0);
     }
     public void zajebAPzBazy(View view) {
         //HANDLE CLICK
     }
-
+    private void refreshList(){
+        adapter.notifyDataSetChanged();
+    }
     public int getChosen() {
         return chosen;
     }
-
     public void setChosen(int chosen) {
         this.chosen = chosen;
     }
