@@ -13,20 +13,21 @@ import com.app.skynet.tulocation.R;
 
 import java.util.ArrayList;
 
+import static com.app.skynet.tulocation.TULocationMain.globalAPList;
+
 public class TULocationList extends ActionBarActivity {
     private ListView list;
     private int chosen = 0;
     private ArrayAdapter adapter;
-    public static APList globalAPList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tulocation_list);
         list = (ListView) findViewById(R.id.listView);
-        globalAPList = new APList();
         initList();
         adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, globalAPList.getWifiList());
         list.setAdapter(adapter);
+        refreshList();
     }
     private void initList() {
         final Intent detailIntent = new Intent (this, com.app.skynet.tulocation.list.TULocationListDetail.class);

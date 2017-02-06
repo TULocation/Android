@@ -11,11 +11,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.app.skynet.tulocation.list.APList;
 
 
 public class TULocationMain extends ActionBarActivity {
-    ListView list;
-    ArrayAdapter adapter;
+    public static APScanner apScanner;
+    public static APList globalAPList;
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
@@ -25,10 +26,10 @@ public class TULocationMain extends ActionBarActivity {
         Intent intent = new Intent (this, com.app.skynet.tulocation.list.TULocationList.class);
         startActivity(intent);
     }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        apScanner = new APScanner(this);
+        globalAPList = new APList();
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainactivity_actions, menu);
         return super.onCreateOptionsMenu(menu);
