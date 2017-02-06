@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.app.skynet.tulocation.APScanner;
+import com.app.skynet.tulocation.IAPScanner;
 import com.app.skynet.tulocation.R;
 import static com.app.skynet.tulocation.TULocationMain.apScanner;
 import static com.app.skynet.tulocation.TULocationMain.globalAPList;
@@ -41,8 +44,8 @@ public class TULocationList extends ActionBarActivity {
         });
     }
     public void scanButton(View view) {
-        apScanner.scan();
-        globalAPList.addAP("huehuenazwa", "huehueMAK", 10, 15, 20.0);
+        IAPScanner s = new APScanner(this);
+        globalAPList = s.scan();
         refreshList();
     }
     public void loadDBButton(View view) {

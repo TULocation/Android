@@ -29,7 +29,6 @@ public class TULocationMain extends ActionBarActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        apScanner = new APScanner(this);
         globalAPList = new APList();
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainactivity_actions, menu);
