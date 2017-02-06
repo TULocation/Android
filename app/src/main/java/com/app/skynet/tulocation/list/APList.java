@@ -12,14 +12,14 @@ public class APList{
     public AccessPoint getElement(int index) {
         return apList.get(index);
     }
-    public void dojebNowegoAccessPointa(String BSSID, String mac, double posX, double posY, double signalStrength) {
+    public void addAP(String BSSID, String mac, double posX, double posY, double signalStrength) {
         apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
         getWifiList().add(apList.get(apList.size() - 1).toString());
     }
-    public void wyjebAccessPointa(int index) {
+    public void removeAP(int index) {
         apList.remove(index);
     }
-    public void wyjebWszystkieAccessPointy() {
+    public void eraseAllAP() {
         apList.clear();
     }
     public ArrayList<String> getWifiList() {

@@ -43,7 +43,7 @@ public class TULocationList extends ActionBarActivity {
         });
     }
     public void jebnijSkana(View view) {
-        globalAPList.dojebNowegoAccessPointa("huehuenazwa", "huehueMAK", 10, 15, 20.0);
+        globalAPList.addAP("huehuenazwa", "huehueMAK", 10, 15, 20.0);
     }
     public void zajebAPzBazy(View view) {
         //HANDLE CLICK
