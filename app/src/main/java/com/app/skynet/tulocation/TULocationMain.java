@@ -15,7 +15,6 @@ import com.app.skynet.tulocation.list.APList;
 
 
 public class TULocationMain extends ActionBarActivity {
-    public static APScanner apScanner;
     public static APList globalAPList;
     @Override
     public void onUserInteraction() {
