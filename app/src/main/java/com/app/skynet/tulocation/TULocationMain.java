@@ -15,7 +15,6 @@ import com.app.skynet.tulocation.list.APList;
 
 
 public class TULocationMain extends ActionBarActivity {
-    public static APList globalAPList;
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
@@ -27,7 +26,6 @@ public class TULocationMain extends ActionBarActivity {
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        globalAPList = new APList();
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainactivity_actions, menu);
         return super.onCreateOptionsMenu(menu);

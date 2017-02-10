@@ -8,12 +8,8 @@ import android.net.wifi.WifiManager;
 import com.app.skynet.tulocation.list.APList;
 import java.util.List;
 import java.util.Observable;
-import java.util.concurrent.locks.ReentrantLock;
-
-import static com.app.skynet.tulocation.TULocationMain.globalAPList;
 
 public class APScanner extends Observable implements IAPScanner{
-    private ReentrantLock lock;
     private Context mContext;
     private WifiManager mainWifiObj;
     private BroadcastReceiver receiver;
@@ -24,7 +20,6 @@ public class APScanner extends Observable implements IAPScanner{
         init();
     }
     private void init(){
-        apScanned =  new APList();
         mainWifiObj = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
         mainWifiObj.startScan();
         if (receiver == null) receiver = new TestReceiver();
@@ -47,7 +42,6 @@ public class APScanner extends Observable implements IAPScanner{
                 apScanned.addAP(scanResult.SSID, scanResult.BSSID,0,0,scanResult.level);
             }
             apScanned.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
-            globalAPList = apScanned;
             notifyScanFinished();
         }
     }

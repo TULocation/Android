@@ -17,19 +17,23 @@ import com.app.skynet.tulocation.R;
 import java.util.Observable;
 import java.util.Observer;
 
-import static com.app.skynet.tulocation.TULocationMain.globalAPList;
 
 public class TULocationList extends AppCompatActivity implements Observer {
     private ListView list;
     private int chosen = 0;
+    private APScanner s;
     private ArrayAdapter adapter;
+    private APList apList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tulocation_list);
         list = (ListView) findViewById(R.id.listView);
         initList();
-        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, globalAPList.getWifiList());
+        apList = new APList();
+        s = new APScanner(this, apList);
+        s.addObserver(this);
+        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, apList.getWifiList());
         list.setAdapter(adapter);
         refreshList();
     }
@@ -42,18 +46,16 @@ public class TULocationList extends AppCompatActivity implements Observer {
             {
                 setChosen(position);
                 setContentView(R.layout.activity_tulocation_list_details);
-                detailIntent.putExtra("chosenAP", globalAPList.getAP(position));
+                detailIntent.putExtra("chosenAP", apList.getAP(position));
                 startActivity(detailIntent);
             }
         });
     }
     public void scanButton(View view) {
-        APScanner s = new APScanner(this, globalAPList);
-        s.addObserver(this);
         s.scan();
     }
     public void loadDBButton(View view) {
-        //HANDLE CLICK
+        refreshList();
     }
     private void refreshList(){
         adapter.notifyDataSetChanged();
