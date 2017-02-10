@@ -7,17 +7,20 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import com.app.skynet.tulocation.list.APList;
 import java.util.List;
+import java.util.Observable;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static com.app.skynet.tulocation.TULocationMain.globalAPList;
 
-public class APScanner implements IAPScanner{
-    final Object signal = new Object();
+public class APScanner extends Observable implements IAPScanner{
+    private ReentrantLock lock;
     private Context mContext;
     private WifiManager mainWifiObj;
     private BroadcastReceiver receiver;
     private APList apScanned;
-    public APScanner(Context mContext) {
+    public APScanner(Context mContext, APList apList) {
         this.mContext = mContext;
+        apScanned = apList;
         init();
     }
     private void init(){
@@ -28,14 +31,12 @@ public class APScanner implements IAPScanner{
         mContext.registerReceiver(receiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
     }
     @Override
-    public APList scan(){
+    public void scan(){
         mainWifiObj.startScan();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return apScanned;
+    }
+    private void notifyScanFinished() {
+        setChanged();
+        notifyObservers();
     }
     private class TestReceiver extends BroadcastReceiver {
         @Override
@@ -45,7 +46,9 @@ public class APScanner implements IAPScanner{
             for (ScanResult scanResult : wifiTmp) {
                 apScanned.addAP(scanResult.SSID, scanResult.BSSID,0,0,scanResult.level);
             }
-
+            apScanned.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
+            globalAPList = apScanned;
+            notifyScanFinished();
         }
     }
 }

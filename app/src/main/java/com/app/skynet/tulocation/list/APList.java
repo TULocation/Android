@@ -2,19 +2,16 @@ package com.app.skynet.tulocation.list;
 
 import java.util.ArrayList;
 
-public class APList{
-    public ArrayList<AccessPoint> apList;
+public class APList implements IAPList{
+    private ArrayList<AccessPoint> apList;
     private ArrayList<String> wifiList;
     public APList(){
         apList =  new ArrayList<AccessPoint>();
         wifiList = new ArrayList<String>();
     }
-    public AccessPoint getElement(int index) {
-        return apList.get(index);
-    }
     public void addAP(String BSSID, String mac, double posX, double posY, double signalStrength) {
         apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
-        getWifiList().add(apList.get(apList.size() - 1).toString());
+        wifiList.add(apList.get(apList.size() - 1).toString());
     }
     public void removeAP(int index) {
         apList.remove(index);
@@ -22,10 +19,10 @@ public class APList{
     public void eraseAllAP() {
         apList.clear();
     }
-    public ArrayList<String> getWifiList() {
-        return wifiList;
+    public AccessPoint getAP(int index) {
+        return apList.get(index);
     }
-    public void setWifiList(ArrayList<String> wifiList) {
-        this.wifiList = wifiList;
+    public ArrayList<String> getWifiList(){
+        return wifiList;
     }
 }

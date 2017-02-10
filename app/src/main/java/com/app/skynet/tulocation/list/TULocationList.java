@@ -4,6 +4,7 @@ package com.app.skynet.tulocation.list;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,10 +13,13 @@ import android.widget.ListView;
 import com.app.skynet.tulocation.APScanner;
 import com.app.skynet.tulocation.IAPScanner;
 import com.app.skynet.tulocation.R;
-import static com.app.skynet.tulocation.TULocationMain.apScanner;
+
+import java.util.Observable;
+import java.util.Observer;
+
 import static com.app.skynet.tulocation.TULocationMain.globalAPList;
 
-public class TULocationList extends ActionBarActivity {
+public class TULocationList extends AppCompatActivity implements Observer {
     private ListView list;
     private int chosen = 0;
     private ArrayAdapter adapter;
@@ -38,15 +42,15 @@ public class TULocationList extends ActionBarActivity {
             {
                 setChosen(position);
                 setContentView(R.layout.activity_tulocation_list_details);
-                detailIntent.putExtra("chosenAP", globalAPList.apList.get(position));
+                detailIntent.putExtra("chosenAP", globalAPList.getAP(position));
                 startActivity(detailIntent);
             }
         });
     }
     public void scanButton(View view) {
-        IAPScanner s = new APScanner(this);
-        globalAPList = s.scan();
-        refreshList();
+        APScanner s = new APScanner(this, globalAPList);
+        s.addObserver(this);
+        s.scan();
     }
     public void loadDBButton(View view) {
         //HANDLE CLICK
@@ -59,5 +63,13 @@ public class TULocationList extends ActionBarActivity {
     }
     public void setChosen(int chosen) {
         this.chosen = chosen;
+    }
+    @Override
+    public void update(Observable observable, Object o) {
+        refreshList();
+    }
+    @Override
+    public void onPause() {
+
     }
 }
