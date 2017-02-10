@@ -15,9 +15,11 @@ public class APList implements IAPList{
     }
     public void removeAP(int index) {
         apList.remove(index);
+        wifiList.remove(index);
     }
     public void eraseAllAP() {
         apList.clear();
+        wifiList.clear();
     }
     public AccessPoint getAP(int index) {
         return apList.get(index);

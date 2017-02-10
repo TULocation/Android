@@ -21,7 +21,6 @@ public class APScanner extends Observable implements IAPScanner{
     }
     private void init(){
         mainWifiObj = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
-        mainWifiObj.startScan();
         if (receiver == null) receiver = new TestReceiver();
         mContext.registerReceiver(receiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
     }
@@ -44,5 +43,11 @@ public class APScanner extends Observable implements IAPScanner{
             apScanned.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
             notifyScanFinished();
         }
+    }
+    public void unregister(){
+        try {
+            mContext.unregisterReceiver(receiver);
+        }
+        catch(IllegalArgumentException e) {}
     }
 }

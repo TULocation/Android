@@ -4,4 +4,5 @@ import com.app.skynet.tulocation.list.TULocationList;
 
 public interface IAPScanner  {
     public void scan();
+    public void unregister();
 }
