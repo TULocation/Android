@@ -3,6 +3,7 @@ package com.app.skynet.tulocation;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,7 +15,7 @@ import android.view.MenuItem;
 import com.app.skynet.tulocation.list.APList;
 
 
-public class TULocationMain extends ActionBarActivity {
+public class TULocationMain extends AppCompatActivity {
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();

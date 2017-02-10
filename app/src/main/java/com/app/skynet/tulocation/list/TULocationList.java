@@ -45,7 +45,6 @@ public class TULocationList extends AppCompatActivity implements Observer {
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3)
             {
                 setChosen(position);
-                setContentView(R.layout.activity_tulocation_list_details);
                 detailIntent.putExtra("chosenAP", apList.getAP(position));
                 startActivity(detailIntent);
             }
@@ -55,6 +54,7 @@ public class TULocationList extends AppCompatActivity implements Observer {
         s.scan();
     }
     public void loadDBButton(View view) {
+        apList.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
         refreshList();
     }
     private void refreshList(){
@@ -71,7 +71,8 @@ public class TULocationList extends AppCompatActivity implements Observer {
         refreshList();
     }
     @Override
-    public void onPause() {
-
+    public void onStop() {
+        super.onStop();
+        s.unregister();
     }
 }
