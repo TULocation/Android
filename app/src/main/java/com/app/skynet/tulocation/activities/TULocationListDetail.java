@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.app.skynet.tulocation.R;
+import com.app.skynet.tulocation.database.APtoDB;
 import com.app.skynet.tulocation.list.AccessPoint;
 
 
@@ -14,6 +15,14 @@ public class TULocationListDetail extends ActionBarActivity {
     private AccessPoint ap;
     private TextView tvMac, tvBssid;
     private EditText etXPos, etYPos;
+    private APtoDB db;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        db.close();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +30,8 @@ public class TULocationListDetail extends ActionBarActivity {
         Intent i = getIntent();
         ap = (AccessPoint) i.getSerializableExtra("chosenAP");
         initText();
+        this.db = new APtoDB(this);
+        db.open();
     }
     private void initText(){
         tvMac = (TextView)findViewById(R.id.apMac);
@@ -35,6 +46,7 @@ public class TULocationListDetail extends ActionBarActivity {
     public void save(View view) {
         ap.setPosX(Double.parseDouble(etXPos.getText().toString()));
         ap.setPosY(Double.parseDouble(etYPos.getText().toString()));
+        db.updateAPPosDist(ap);
         Intent intent = new Intent();
         intent.putExtra("editedValue",ap);
         setResult(RESULT_OK, intent);

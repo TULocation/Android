@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.app.skynet.tulocation.R;
+import com.app.skynet.tulocation.database.APtoDB;
 import com.app.skynet.tulocation.list.APList;
 import com.app.skynet.tulocation.list.AccessPoint;
 import com.app.skynet.tulocation.scanner.APScanner;
@@ -24,14 +25,20 @@ public class TULocationList extends ActionBarActivity implements Observer {
     private APScanner s;
     private ArrayAdapter adapter;
     private APList apList;
+    private APtoDB db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tulocation_list);
+        this.db = new APtoDB(this);
+        db.open();
+
         list = (ListView) findViewById(R.id.listView);
         initList();
-        APList apList = APList.getInstance();
+        apList = APList.getInstance();
         s = new APScanner(this, apList);
+
         s.addObserver(this);
         adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, apList.getWifiList());
         list.setAdapter(adapter);
@@ -59,6 +66,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
         refreshList();
     }
     private void refreshList(){
+//        apList.setApList(db.getAllComments());
         adapter.notifyDataSetChanged();
     }
     public int getChosen() {
@@ -74,6 +82,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
     @Override
     public void onStop() {
         super.onStop();
+        db.close();
         s.unregister();
     }
     public void onResume(){

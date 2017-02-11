@@ -11,14 +11,17 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     //    private String DATABASE_NAME = "access_point_tulocation";
+
+    /*RAKI*/
     public static final String TABLE_COMMENTS = "accesspoints";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_BSSID = "bssid";
     public static final String COLUMN_XLOC = "xloc";
     public static final String COLUMN_YLOC = "yloc";
     public static final String COLUMN_DIST = "dist";
+
     private static final String DATABASE_NAME = "tulocation.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "

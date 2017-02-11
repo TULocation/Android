@@ -1,10 +1,11 @@
 package com.app.skynet.tulocation.list;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class APList implements IAPList{
     private static APList ap = new APList();
-    private ArrayList<AccessPoint> apList;
+    private List<AccessPoint> apList;
     private ArrayList<String> wifiList;
     private APList(){
         apList =  new ArrayList<AccessPoint>();
@@ -25,6 +26,11 @@ public class APList implements IAPList{
         apList.clear();
         wifiList.clear();
     }
+
+    public void setApList(List<AccessPoint> apList) {
+        this.apList = apList;
+    }
+
     @Override
     public void setAP(AccessPoint ap, int index) {
         apList.set(index, ap);

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import com.app.skynet.tulocation.list.APList;
 import com.app.skynet.tulocation.list.AccessPoint;
 
 import java.util.ArrayList;
@@ -69,13 +70,29 @@ public class APtoDB {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
+
             AccessPoint comment = cursorToComment(cursor);
+            Log.i(APtoDB.class.getName(), "APEK! "+comment.getMac());
             comments.add(comment);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
         return comments;
+    }
+
+    public void updateAPPosDist(AccessPoint point){
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.COLUMN_XLOC,point.getPosX()); //These Fields should be your String values of actual column names
+        cv.put(DBHelper.COLUMN_YLOC,point.getPosY());
+        cv.put(DBHelper.COLUMN_DIST,point.getDistance());
+        database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_BSSID+"=\""+point.getMac()+"\"", null);
+    }
+
+    public void updateAPDist(AccessPoint point){
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.COLUMN_DIST,point.getDistance());
+        database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_BSSID+"=\""+point.getMac()+"\"", null);
     }
 
     private AccessPoint cursorToComment(Cursor cursor) {

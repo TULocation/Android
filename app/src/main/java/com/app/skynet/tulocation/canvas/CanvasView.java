@@ -43,6 +43,11 @@ public class CanvasView extends View {
         mPaint.setStrokeWidth(4f);
     }
 
+    public void drawcircle(float x, float y) {
+        mPaint.setColor(Color.BLUE);
+        mCanvas.drawCircle(x, y, 5, mPaint);
+    }
+
     // override onSizeChanged
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -92,23 +97,23 @@ public class CanvasView extends View {
     //override the onTouchEvent
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startTouch(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                moveTouch(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                upTouch();
-                invalidate();
-                break;
-        }
-        return true;
+//        float x = event.getX();
+//        float y = event.getY();
+//
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                startTouch(x, y);
+//                invalidate();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                moveTouch(x, y);
+//                invalidate();
+//                break;
+//            case MotionEvent.ACTION_UP:
+//                upTouch();
+//                invalidate();
+//                break;
+//        }
+        return false;
     }
 }
