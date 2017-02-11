@@ -30,7 +30,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
         setContentView(R.layout.activity_tulocation_list);
         list = (ListView) findViewById(R.id.listView);
         initList();
-        APList apList = APList.getInstance();
+        apList = APList.getInstance();
         s = new APScanner(this, apList);
         s.addObserver(this);
         adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, apList.getWifiList());
@@ -55,7 +55,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
     }
     public void loadDBButton(View view) {
         //------------ FOR TESTING PURPOSES
-        //apList.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
+        apList.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
         refreshList();
     }
     private void refreshList(){
