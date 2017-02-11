@@ -30,7 +30,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
         setContentView(R.layout.activity_tulocation_list);
         list = (ListView) findViewById(R.id.listView);
         initList();
-        apList = new APList();
+        APList apList = APList.getInstance();
         s = new APScanner(this, apList);
         s.addObserver(this);
         adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, apList.getWifiList());
