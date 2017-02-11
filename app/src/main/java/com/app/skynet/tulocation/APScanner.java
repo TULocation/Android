@@ -21,6 +21,7 @@ public class APScanner extends Observable implements IAPScanner{
     }
     private void init(){
         mainWifiObj = (WifiManager) mContext.getSystemService(Context.WIFI_SERVICE);
+        mainWifiObj.startScan();
         if (receiver == null) receiver = new TestReceiver();
         mContext.registerReceiver(receiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
     }
@@ -36,11 +37,17 @@ public class APScanner extends Observable implements IAPScanner{
         @Override
         public void onReceive(Context context, Intent intent) {
             apScanned.eraseAllAP();
+            mainWifiObj.startScan();
             List<ScanResult> wifiTmp = mainWifiObj.getScanResults();
             for (ScanResult scanResult : wifiTmp) {
                 apScanned.addAP(scanResult.SSID, scanResult.BSSID,0,0,scanResult.level);
             }
-            apScanned.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
+            if(wifiTmp.isEmpty()) {
+                apScanned.addAP("List", "empty", 0, 0, 50);
+            }
+            else {
+                apScanned.addAP("List", "not empty", 0, 0, 50);
+            }
             notifyScanFinished();
         }
     }
