@@ -1,24 +1,24 @@
-package com.app.skynet.tulocation.list;
+package com.app.skynet.tulocation.activities;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.app.skynet.tulocation.APScanner;
-import com.app.skynet.tulocation.IAPScanner;
 import com.app.skynet.tulocation.R;
+import com.app.skynet.tulocation.list.APList;
+import com.app.skynet.tulocation.list.AccessPoint;
+import com.app.skynet.tulocation.scanner.APScanner;
 
 import java.util.Observable;
 import java.util.Observer;
 
 
-public class TULocationList extends AppCompatActivity implements Observer {
+public class TULocationList extends ActionBarActivity implements Observer {
     private ListView list;
     private int chosen = 0;
     private APScanner s;
@@ -38,7 +38,7 @@ public class TULocationList extends AppCompatActivity implements Observer {
         refreshList();
     }
     private void initList() {
-        final Intent detailIntent = new Intent (this, com.app.skynet.tulocation.list.TULocationListDetail.class);
+        final Intent detailIntent = new Intent (this, TULocationListDetail.class);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -74,5 +74,9 @@ public class TULocationList extends AppCompatActivity implements Observer {
     public void onStop() {
         super.onStop();
         s.unregister();
+    }
+    public void onResume(){
+        super.onResume();
+        refreshList();
     }
 }

@@ -15,17 +15,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TULocationMain">
+        <activity android:name=".activities.TULocationMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".list.TULocationList"
+        <activity android:name=".activities.TULocationList"
             android:label="@string/app_name">
         </activity>
-        <activity android:name=".list.TULocationListDetail"
+        <activity android:name=".activities.TULocationListDetail"
             android:label="@string/app_name">
         </activity>
     </application>
