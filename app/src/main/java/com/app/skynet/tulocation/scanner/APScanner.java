@@ -43,14 +43,14 @@ public class APScanner extends Observable implements IAPScanner{
                 apScanned.addAP(scanResult.SSID, scanResult.BSSID,0,0,scanResult.level);
             }
             //------------ FOR TESTING PURPOSES
-
+            /*
             if(wifiTmp.isEmpty()) {
                 apScanned.addAP("List", "empty", 0, 0, 50);
             }
             else {
                 apScanned.addAP("List", "not empty", 0, 0, 50);
             }
-
+            */
             //------------ FOR TESTING PURPOSES
             notifyScanFinished();
         }

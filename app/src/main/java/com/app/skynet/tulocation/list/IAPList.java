@@ -6,6 +6,7 @@ public interface IAPList {
     public void addAP(String BSSID, String mac, double posX, double posY, double signalStrength);
     public void removeAP(int index);
     public void eraseAllAP();
+    public void setAP(AccessPoint ap, int index);
     public AccessPoint getAP(int index);
     public ArrayList<String> getWifiList();
 }

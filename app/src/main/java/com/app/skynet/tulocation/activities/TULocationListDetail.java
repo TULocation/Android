@@ -35,6 +35,9 @@ public class TULocationListDetail extends ActionBarActivity {
     public void save(View view) {
         ap.setPosX(Double.parseDouble(etXPos.getText().toString()));
         ap.setPosY(Double.parseDouble(etYPos.getText().toString()));
-        ap.setMac("LOL");
+        Intent intent = new Intent();
+        intent.putExtra("editedValue",ap);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
