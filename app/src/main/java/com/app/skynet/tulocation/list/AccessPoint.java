@@ -2,7 +2,6 @@ package com.app.skynet.tulocation.list;
 
 
 import java.io.Serializable;
-import java.util.Observable;
 
 public class AccessPoint implements Serializable {
     private String BSSID;
@@ -10,12 +9,12 @@ public class AccessPoint implements Serializable {
     private double posX;
     private double posY;
     private double signalStrength;
-    public AccessPoint(String BSSID, String mac, double posX, double posY, double signalStrength){
+    public AccessPoint(String BSSID, String mac, double posX, double posY, double distance){
         this.BSSID = BSSID;
         this.setMac(mac);
         this.setPosX(posX);
         this.setPosY(posY);
-        this.setSignalStrength(signalStrength);
+        this.setDistance(distance);
     }
     public AccessPoint(){
         this(null,null,0,0,0);
@@ -38,10 +37,10 @@ public class AccessPoint implements Serializable {
     public void setPosY(double posY) {
         this.posY = posY;
     }
-    public double getSignalStrength() {
+    public double getDistance() {
         return signalStrength;
     }
-    public void setSignalStrength(double signalStrength) {
+    public void setDistance(double signalStrength) {
         this.signalStrength = signalStrength;
     }
     public String getBSSID() {
