@@ -1,4 +1,4 @@
-package com.app.skynet.tulocation;
+package com.app.skynet.tulocation.scanner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,18 +36,22 @@ public class APScanner extends Observable implements IAPScanner{
     private class TestReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            apScanned.eraseAllAP();
             mainWifiObj.startScan();
             List<ScanResult> wifiTmp = mainWifiObj.getScanResults();
+            apScanned.eraseAllAP();
             for (ScanResult scanResult : wifiTmp) {
                 apScanned.addAP(scanResult.SSID, scanResult.BSSID,0,0,scanResult.level);
             }
+            //------------ FOR TESTING PURPOSES
+
             if(wifiTmp.isEmpty()) {
                 apScanned.addAP("List", "empty", 0, 0, 50);
             }
             else {
                 apScanned.addAP("List", "not empty", 0, 0, 50);
             }
+
+            //------------ FOR TESTING PURPOSES
             notifyScanFinished();
         }
     }
