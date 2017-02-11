@@ -46,7 +46,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
             {
                 setChosen(position);
                 detailIntent.putExtra("chosenAP", apList.getAP(position));
-                startActivity(detailIntent);
+                startActivityForResult(detailIntent,1);
             }
         });
     }
@@ -54,7 +54,8 @@ public class TULocationList extends ActionBarActivity implements Observer {
         s.scan();
     }
     public void loadDBButton(View view) {
-        apList.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
+        //------------ FOR TESTING PURPOSES
+        //apList.addAP("AAAAAAA", "BBBBBBB", 0, 0, 50);
         refreshList();
     }
     private void refreshList(){
@@ -78,5 +79,13 @@ public class TULocationList extends ActionBarActivity implements Observer {
     public void onResume(){
         super.onResume();
         refreshList();
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                apList.setAP((AccessPoint) data.getSerializableExtra("editedValue"),chosen);
+            }
+        }
     }
 }

@@ -21,6 +21,11 @@ public class APList implements IAPList{
         apList.clear();
         wifiList.clear();
     }
+    @Override
+    public void setAP(AccessPoint ap, int index) {
+        apList.set(index, ap);
+        wifiList.set(index, ap.toString());
+    }
     public AccessPoint getAP(int index) {
         return apList.get(index);
     }
