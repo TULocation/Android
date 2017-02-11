@@ -3,11 +3,15 @@ package com.app.skynet.tulocation.list;
 import java.util.ArrayList;
 
 public class APList implements IAPList{
+    private static APList ap = new APList();
     private ArrayList<AccessPoint> apList;
     private ArrayList<String> wifiList;
-    public APList(){
+    private APList(){
         apList =  new ArrayList<AccessPoint>();
         wifiList = new ArrayList<String>();
+    }
+    public static APList getInstance() {
+        return ap;
     }
     public void addAP(String BSSID, String mac, double posX, double posY, double signalStrength) {
         apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
