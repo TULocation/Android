@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ENABLE = "enable";
 
     private static final String DATABASE_NAME = "tulocation.db";
-    private static final int DATABASE_VERSION = 5; //iterate if u change something
+    private static final int DATABASE_VERSION = 6; //iterate if u change something
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "

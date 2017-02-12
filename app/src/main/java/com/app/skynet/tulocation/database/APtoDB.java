@@ -58,11 +58,11 @@ public class APtoDB {
             cursor.close();
             return newComment;
         } catch (SQLiteException ex) {
-            if (ex instanceof SQLiteConstraintException) {
-                updateAPDist(mac, distance);
+          //  if (ex instanceof SQLiteConstraintException) {
+                updateAPDist(mac, distance, 1);
 //                int i = database.update(DBHelper.TABLE_COMMENTS, values, DBHelper.COLUMN_BSSID + "=\"" + mac + "\"", null);
                 Log.e(APtoDB.class.getName(), "ERROR UNIQUE[]: "+ex.getMessage() +" "+ values.toString());
-            }
+         //   }
 //            else
 //                throw ex;
             return null;
@@ -96,9 +96,10 @@ public class APtoDB {
         database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_BSSID + "=\"" + point.getMac() + "\"", null);
     }
 
-    public void updateAPDist(String mac, double dist) {
+    public void updateAPDist(String mac, double dist, int flag) {
         ContentValues cv = new ContentValues();
         cv.put(DBHelper.COLUMN_DIST, dist);
+        cv.put(DBHelper.COLUMN_ENABLE, flag);
         database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_BSSID + "=\"" + mac + "\"", null);
     }
     public AccessPoint getAP(String mac) {
@@ -111,19 +112,21 @@ public class APtoDB {
         return  newComment;
     }
     public void setFalseAP() {
-        String where = "UPDATE "+ DBHelper.TABLE_COMMENTS +" SET " + DBHelper.COLUMN_ENABLE + " = 0";
-//        ContentValues cv = new ContentValues();
-//        cv.put(DBHelper.COLUMN_ENABLE, 0);
+        String where = "UPDATE "+ DBHelper.TABLE_COMMENTS +" SET " + DBHelper.COLUMN_ENABLE + "=0";
+        ContentValues cv = new ContentValues();
+        cv.put(DBHelper.COLUMN_ENABLE, 0);
         try {
             Cursor c = database.rawQuery(where,null);
-//            int c = database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_ENABLE + " in (1,0)", null);
+//            int c = database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_ENABLE + " = 1", null);
 //            String[] g = c.getColumnNames();
 //            String h = "";
 //            for(String tmp:g){
 //                h+=" "+tmp;
 //            }
-            Log.i(APtoDB.class.getName(), "ROBIE UPDATE "+c);
 
+
+            Log.i(APtoDB.class.getName(), "ROBIE UPDATE "+c);
+            c.close();
         } catch (SQLiteException ex) {
             Log.e(APtoDB.class.getName(), ex.getMessage());
         }

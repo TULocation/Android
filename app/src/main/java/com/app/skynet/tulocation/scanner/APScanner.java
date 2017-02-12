@@ -63,9 +63,9 @@ public class APScanner extends Observable implements IAPScanner {
             db.open();
 //            mainWifiObj.startScan();
 
-
-            List<ScanResult> wifiTmp = mainWifiObj.getScanResults();
             db.setFalseAP();
+            List<ScanResult> wifiTmp = mainWifiObj.getScanResults();
+
 //            apScanned.eraseAllAP();
 //            ScanResult penta = getAp("00:6c:0e:00:99:e8", wifiTmp);
 //            ScanResult ddr = getAp("00:16:b6:bc:cb:b7", wifiTmp);

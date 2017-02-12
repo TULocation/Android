@@ -103,6 +103,7 @@ public class CustomShape extends View implements Observer {
     }
 
     private void processPos() {
+
         Trilateration tri = new Trilateration(apeki.get(0), apeki.get(1), apeki.get(2));
         Double[] tmp = tri.calculateCords();
         this.x = tmp[0];
