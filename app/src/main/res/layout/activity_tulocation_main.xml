@@ -13,7 +13,8 @@
     <com.app.skynet.tulocation.canvas.CustomShape
         android:id="@+id/canv"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
 
     <!--android:theme="@style/ListFont"-->
