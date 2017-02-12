@@ -79,7 +79,7 @@ public class APtoDB {
         while (!cursor.isAfterLast()) {
 
             AccessPoint comment = cursorToComment(cursor);
-            Log.i(APtoDB.class.getName(), "APEK! " + comment.getMac());
+            Log.i(APtoDB.class.getName(), "APEK! " + comment.getMac() +" " +comment.isEnable());
             comments.add(comment);
             cursor.moveToNext();
         }
@@ -116,8 +116,8 @@ public class APtoDB {
         ContentValues cv = new ContentValues();
         cv.put(DBHelper.COLUMN_ENABLE, 0);
         try {
-            Cursor c = database.rawQuery(where,null);
-//            int c = database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_ENABLE + " = 1", null);
+//            Cursor c = database.rawQuery(where,null);
+            int c = database.update(DBHelper.TABLE_COMMENTS, cv, DBHelper.COLUMN_ENABLE + " = 1", null);
 //            String[] g = c.getColumnNames();
 //            String h = "";
 //            for(String tmp:g){
@@ -126,7 +126,7 @@ public class APtoDB {
 
 
             Log.i(APtoDB.class.getName(), "ROBIE UPDATE "+c);
-            c.close();
+//            c.close();
         } catch (SQLiteException ex) {
             Log.e(APtoDB.class.getName(), ex.getMessage());
         }
