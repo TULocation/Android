@@ -8,20 +8,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.app.skynet.tulocation.activities.TULocationMain">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="napierdalaj liste"
-        android:onClick="goToActivityList"
-        android:id="@+id/button" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="272dp"
-        android:id="@+id/listView"
-        android:layout_below="@+id/button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp" />
+
+    <com.app.skynet.tulocation.canvas.CustomShape
+        android:id="@+id/canv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
     <!--android:theme="@style/ListFont"-->
 </RelativeLayout>

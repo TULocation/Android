@@ -16,21 +16,25 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABLE_COMMENTS = "accesspoints";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_BSSID = "bssid";
+    public static final String COLUMN_SSID = "ssid";
     public static final String COLUMN_XLOC = "xloc";
     public static final String COLUMN_YLOC = "yloc";
     public static final String COLUMN_DIST = "dist";
+    public static final String COLUMN_ENABLE = "enable";
 
     private static final String DATABASE_NAME = "tulocation.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 5; //iterate if u change something
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
             + TABLE_COMMENTS + "( " + COLUMN_ID
             + " integer primary key autoincrement, "
             + COLUMN_BSSID + " text unique not null,"
+            + COLUMN_SSID + " text,"
             + COLUMN_XLOC + " real,"
             + COLUMN_YLOC + " real,"
-            + COLUMN_DIST + " real"
+            + COLUMN_DIST + " real,"
+            + COLUMN_ENABLE + " integer"
             + ");";
 
     public DBHelper(Context context) {

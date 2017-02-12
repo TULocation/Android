@@ -1,5 +1,8 @@
 package com.app.skynet.tulocation.trilateration;
 
+import android.util.Log;
+
+
 import com.app.skynet.tulocation.list.AccessPoint;
 
 /**
@@ -24,7 +27,7 @@ public class Trilateration {
         return Math.pow(10.0, exp);
     }
 
-    public DeviceLocation calculateCords(){
+    public Double[] calculateCords(){
         double fC1 = this.firstNode.getPosX() * this.firstNode.getPosX();
         double fC2 = this.firstNode.getPosY() * this.firstNode.getPosY();
         double sC1 = this.secondNode.getPosX() * this.secondNode.getPosX();
@@ -52,9 +55,9 @@ public class Trilateration {
         double numerator2 = distS - distF + fC1 - sC1 + fC2 - sC2 - 2 * diff12y * y;
         double denumerator2 = 2 * diff12x;
         double x = numerator2/denumerator2;
-
-        return new DeviceLocation(x,y);
-
+        Log.i(Trilateration.class.getName(),"W TRI " + x + " " + y);
+      return new Double[]{ x,y};
+//        dev.setPos(x,y);
     }
 
 }

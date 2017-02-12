@@ -14,10 +14,16 @@ public class APList implements IAPList{
     public static APList getInstance() {
         return ap;
     }
+
+    @Override
     public void addAP(String BSSID, String mac, double posX, double posY, double signalStrength) {
-        apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
-        wifiList.add(apList.get(apList.size() - 1).toString());
+
     }
+
+    //    public void addAP(String BSSID, String mac, double posX, double posY, double signalStrength) {
+//        apList.add(new AccessPoint(BSSID, mac, posX, posY, signalStrength));
+//        wifiList.add(apList.get(apList.size() - 1).toString());
+//    }
     public void removeAP(int index) {
         apList.remove(index);
         wifiList.remove(index);

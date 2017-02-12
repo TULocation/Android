@@ -27,6 +27,22 @@ public class CanvasView extends View {
     private Paint mPaint;
     private float mX, mY;
 
+    public CanvasView(Context context) {
+        super(context);
+        this.context = context;
+
+        // we set a new Path
+        mPath = new Path();
+
+        // and we set a new Paint with the desired attributes
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setColor(Color.BLACK);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeJoin(Paint.Join.ROUND);
+        mPaint.setStrokeWidth(4f);
+    }
+
     public CanvasView(Context c, AttributeSet attrs) {
         super(c, attrs);
         context = c;
@@ -45,7 +61,8 @@ public class CanvasView extends View {
 
     public void drawcircle(float x, float y) {
         mPaint.setColor(Color.BLUE);
-        mCanvas.drawCircle(x, y, 5, mPaint);
+        mPath.moveTo(x,y);
+//        mCanvas.drawCircle(x, y, 5, mPaint);
     }
 
     // override onSizeChanged
@@ -97,23 +114,24 @@ public class CanvasView extends View {
     //override the onTouchEvent
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        float x = event.getX();
-//        float y = event.getY();
-//
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_DOWN:
-//                startTouch(x, y);
-//                invalidate();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                moveTouch(x, y);
-//                invalidate();
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                upTouch();
-//                invalidate();
-//                break;
-//        }
-        return false;
+        float x = event.getX();
+        float y = event.getY();
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+
+                startTouch(x, y);
+                invalidate();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                moveTouch(x, y);
+                invalidate();
+                break;
+            case MotionEvent.ACTION_UP:
+                upTouch();
+                invalidate();
+                break;
+        }
+        return true;
     }
 }

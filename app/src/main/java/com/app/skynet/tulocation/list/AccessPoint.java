@@ -9,15 +9,25 @@ public class AccessPoint implements Serializable {
     private double posX;
     private double posY;
     private double signalStrength;
-    public AccessPoint(String BSSID, String mac, double posX, double posY, double distance){
+    private int enable; //0 false 1 true cause SQLite
+    public AccessPoint(String BSSID, String mac, double posX, double posY, double distance, int enable){
         this.BSSID = BSSID;
         this.setMac(mac);
         this.setPosX(posX);
         this.setPosY(posY);
         this.setDistance(distance);
     }
+
+    public int isEnable() {
+        return enable;
+    }
+
+    public void setEnable(int enable) {
+        this.enable = enable;
+    }
+
     public AccessPoint(){
-        this(null,null,0,0,0);
+        this(null,null,0,0,0,0);
     }
     public String getMac() {
         return mac;

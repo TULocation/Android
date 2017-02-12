@@ -4,6 +4,7 @@ package com.app.skynet.tulocation.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +16,8 @@ import com.app.skynet.tulocation.list.APList;
 import com.app.skynet.tulocation.list.AccessPoint;
 import com.app.skynet.tulocation.scanner.APScanner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -26,7 +29,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
     private ArrayAdapter adapter;
     private APList apList;
     private APtoDB db;
-
+    private List<AccessPoint> lista = new ArrayList<AccessPoint>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,15 +37,20 @@ public class TULocationList extends ActionBarActivity implements Observer {
         this.db = new APtoDB(this);
         db.open();
 
+        lista = db.getAllComments();
+
+
         list = (ListView) findViewById(R.id.listView);
         initList();
         apList = APList.getInstance();
         s = new APScanner(this, apList);
 
         s.addObserver(this);
-        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, apList.getWifiList());
+        adapter = new ArrayAdapter(getApplicationContext(), R.layout.dark_list, lista);
         list.setAdapter(adapter);
-        refreshList();
+        adapter.notifyDataSetChanged();
+//        refreshList();
+        db.close();
     }
     private void initList() {
         final Intent detailIntent = new Intent (this, TULocationListDetail.class);
@@ -52,7 +60,11 @@ public class TULocationList extends ActionBarActivity implements Observer {
             public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3)
             {
                 setChosen(position);
-                detailIntent.putExtra("chosenAP", apList.getAP(position));
+                db.open();
+                AccessPoint tmp = db.getAP(lista.get(position).getMac());
+                Log.i(TULocationList.class.getName(), tmp.getMac() + " " + tmp.getPosX() + " " + tmp.getPosY());
+                detailIntent.putExtra("chosenAP", lista.get(position).getMac());
+                db.close();
                 startActivityForResult(detailIntent,1);
             }
         });
@@ -66,7 +78,10 @@ public class TULocationList extends ActionBarActivity implements Observer {
         refreshList();
     }
     private void refreshList(){
-//        apList.setApList(db.getAllComments());
+        db.open();
+        lista.clear();
+        lista.addAll(db.getAllComments());
+        db.close();
         adapter.notifyDataSetChanged();
     }
     public int getChosen() {
@@ -82,7 +97,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
     @Override
     public void onStop() {
         super.onStop();
-        db.close();
+
         s.unregister();
     }
     public void onResume(){
@@ -93,7 +108,7 @@ public class TULocationList extends ActionBarActivity implements Observer {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                apList.setAP((AccessPoint) data.getSerializableExtra("editedValue"),chosen);
+                lista.set(chosen,(AccessPoint) data.getSerializableExtra("editedValue"));
             }
         }
     }
